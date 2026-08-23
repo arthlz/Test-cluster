@@ -111,10 +111,10 @@ class ImageVectorDB:
     def _get_image_embedding(self, image: Image.Image) -> np.ndarray:
         """
         Get the embedding for a single image using CLIP.
-        
+
         Args:
             image (Image.Image): PIL Image object
-            
+
         Returns:
             np.ndarray: The image embedding
         """
@@ -122,16 +122,29 @@ class ImageVectorDB:
             # Convert to RGB if needed
             if image.mode != "RGB":
                 image = image.convert("RGB")
-            
+
             inputs = self.processor(images=image, return_tensors="pt").to(self.device)
-            
+
             with torch.no_grad():
                 outputs = self.model.get_image_features(**inputs)
-            
+
+                # Extrai o tensor de dentro do objeto de saida
+                if hasattr(outputs, "pooler_output") and outputs.pooler_output is not None:
+                    tensor_output = outputs.pooler_output
+                elif hasattr(outputs, "image_embeds") and outputs.image_embeds is not None:
+                    tensor_output = outputs.image_embeds
+                elif isinstance(outputs, torch.Tensor):
+                    tensor_output = outputs
+                else:
+                    tensor_output = outputs[0]
+
             # Normalize the embedding
-            embedding = outputs.cpu().numpy()
-            embedding = embedding / np.linalg.norm(embedding)
+            embedding = tensor_output.cpu().detach().numpy()
+            norm = np.linalg.norm(embedding)
+            if norm > 0:
+                embedding = embedding / norm
             return embedding[0]  # Return the first (and only) embedding
+
         except Exception as e:
             print(f"Error processing image: {e}")
             # Return zeros as a fallback

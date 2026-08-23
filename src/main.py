@@ -14,7 +14,7 @@ from transformers import AutoProcessor, AutoModelForImageTextToText, BitsAndByte
 
 from .data.dataset import ROCOv2DataHandler
 from .vectordb.image_vectordb import ImageVectorDB
-from .llm.llm_utils import MedicalImageCaptioner
+from .llm.llm_utils import MedicalImageCaptioner as CaptionerEngine
 from .analysis.cost_analysis import CostAnalyzer
 from .analysis.evaluation_visualizer import EvaluationVisualizer
 
@@ -48,26 +48,20 @@ class MedicalImageCaptioner:
         self.model_name = model_name
         self.max_tokens = max_tokens
 
-        if self.provider == "huggingface" or "medgemma" in self.model_name.lower():
-            print(f"Carregando modelo local {self.model_name}")
+        self.num_validation_samples = 300
+        self.num_rag_examples = 3
+        self.random_seed=42
 
-            # Caso a GPU não tenha mais que 80 GB
-            bnb_config = BitsAndBytesConfig(
-                load_in_4bit=True,
-                bnb_4bit_quant_type="nf4",
-                bnb_4bit_compute_dtype=torch.bfloat16,
-                bnb_4bit_use_double_quant=True,
-                llm_int8_enable_fp32_cpu_offload=True
-            )
-
-            self.model = AutoModelForImageTextToText.from_pretrained(
-                self.model_name,
-                quantization_config=bnb_config,
-                device_map={"": 0}
-            )
-
-            self.processor = AutoProcessor.from_pretrained(self.model_name)
+        self.run_evaluation = True 
+        self.run_cost_analysis= False 
         
+        self.captioner = CaptionerEngine(
+            provider=self.provider,
+            model_name=self.model_name,
+            max_tokens=self.max_tokens
+        )
+
+        print(f"Carregando modelo local {self.model_name}")
         
     def setup_pipeline(self) -> None:
         """Setup the pipeline by loading dataset and building vector database."""
@@ -91,6 +85,7 @@ class MedicalImageCaptioner:
         if vectordb_path.exists() and (vectordb_path / "image_index.faiss").exists() and (vectordb_path / "metadata.json").exists():
             print("2. Loading existing vector database...")
             print(f"   Found existing vector database at: {vectordb_path}")
+            self.vectordb = ImageVectorDB()
             self.vectordb.load(str(vectordb_path))
             print("   Vector database loaded successfully!")
         else:
@@ -422,7 +417,7 @@ def main(config: Config):
     # Instancia o pipeline passando a config ativa
     pipeline = MedicalImageCaptioner(
         provider=getattr(config, 'provider', 'huggingface'),
-        model_name=getattr(config, 'model_name', 'google/medgemma-27b-it')
+        model_name=getattr(config, 'model_name', 'google/medgemma-1.5-4b-it')
     )
     
     try:
@@ -444,7 +439,7 @@ def main(config: Config):
 
 if __name__ == "__main__":
     # Modelos e números de exemplos RAG a testar
-    model_names = ["google/medgemma-27b-it"]
+    model_names = ["google/medgemma-1.5-4b-it"]
     rag_examples = [0, 3]
 
     for model_name in model_names:
