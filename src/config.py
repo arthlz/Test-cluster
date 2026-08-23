@@ -33,7 +33,7 @@ class Config:
         if custom_cache:
             self.cache_dir = Path(custom_cache)
         else:
-            self.cache_dir = Path(f"{self.cache_drive}:/huggingface_cache")
+            self.cache_dir = Path.home() / ".cache" / "huggingface"
         
         # Create cache directory
         self.cache_dir.mkdir(parents=True, exist_ok=True)

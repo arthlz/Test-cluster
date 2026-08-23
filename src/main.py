@@ -55,16 +55,19 @@ class MedicalImageCaptioner:
             bnb_config = BitsAndBytesConfig(
                 load_in_4bit=True,
                 bnb_4bit_quant_type="nf4",
-                bnb_4bit_compute_dtype=torch.bfloat16
-            ) if use_4bit else None
+                bnb_4bit_compute_dtype=torch.bfloat16,
+                bnb_4bit_use_double_quant=True,
+                llm_int8_enable_fp32_cpu_offload=True
+            )
 
-        self.processor = AutoProcessor.from_pretrained(self.model_name)
-        self.model = AutoModelForImageTextToText.from_pretrained(
-            self.model_name,
-            quantization_config = bnb_config,
-            torch_dtype=torch.bfloat16,
-            device_map="auto"
-        )
+            self.model = AutoModelForImageTextToText.from_pretrained(
+                self.model_name,
+                quantization_config=bnb_config,
+                device_map={"": 0}
+            )
+
+            self.processor = AutoProcessor.from_pretrained(self.model_name)
+        
         
     def setup_pipeline(self) -> None:
         """Setup the pipeline by loading dataset and building vector database."""
@@ -74,6 +77,8 @@ class MedicalImageCaptioner:
         
         # Load dataset
         print("1. Loading ROCOv2 dataset from HuggingFace...")
+        self.config = get_config()
+        self.data_handler = ROCOv2DataHandler()
         self.data_handler.load_dataset()
         
         # Get dataset info
@@ -98,6 +103,7 @@ class MedicalImageCaptioner:
             max_samples = 10000  # Start with 10k samples, adjust as needed
             print(f"   Processing up to {max_samples} training samples for vector database")
             
+            self.vectordb = ImageVectorDB()
             self.vectordb.build_from_huggingface_dataset(
                 train_dataset, 
                 batch_size=8,  # Smaller batch size for memory efficiency
@@ -142,10 +148,10 @@ class MedicalImageCaptioner:
         # Process each validation sample
         results = []
         total_cost = 0.0
-        
+        total_samples = len(validation_samples)
         for i, sample in enumerate(validation_samples):
-            print(f"\n2.{i+1} Processing sample {i+1}/{len(validation_samples)}")
-            print(f"   Image ID: {sample['image_id']}")
+            if (i + 1) % 10 == 0 or (i + 1) == 1 or (i + 1) == total_samples:
+                print(f"[{datetime.now().strftime('%H:%M:%S')}] Amostra {i + 1}/{total_samples} em processamento...", flush=True)
             
             try:
                 if self.num_rag_examples > 0:
@@ -414,7 +420,10 @@ def main(config: Config):
         print("Warning: HF_TOKEN not found. Ensure you are authenticated via 'huggingface-cli login'.")
 
     # Instancia o pipeline passando a config ativa
-    pipeline = MedicalImageCaptioningPipeline(config_file=config.config_file if hasattr(config, 'config_file') else None)
+    pipeline = MedicalImageCaptioner(
+        provider=getattr(config, 'provider', 'huggingface'),
+        model_name=getattr(config, 'model_name', 'google/medgemma-27b-it')
+    )
     
     try:
         pipeline.setup_pipeline()
