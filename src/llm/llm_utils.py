@@ -5,7 +5,7 @@ from typing import List, Dict, Any, Tuple
 from transformers import AutoProcessor, AutoModelForImageTextToText, BitsAndBytesConfig
 
 class MedicalImageCaptioner:
-    def __init__(self, provider: str = "huggingface", model_name: str = "google/medgemma-1.5-4b-it", max_tokens: int = 512):
+    def __init__(self, provider: str = "huggingface", model_name: str = "google/medgemma-27b-it", max_tokens: int = 512):
         self.provider = provider.lower()
         self.model_name = model_name
         self.max_tokens = max_tokens

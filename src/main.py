@@ -417,7 +417,7 @@ def main(config: Config):
     # Instancia o pipeline passando a config ativa
     pipeline = MedicalImageCaptioner(
         provider=getattr(config, 'provider', 'huggingface'),
-        model_name=getattr(config, 'model_name', 'google/medgemma-1.5-4b-it')
+        model_name=getattr(config, 'model_name', 'google/medgemma-27b-it')
     )
     
     try:
@@ -439,7 +439,7 @@ def main(config: Config):
 
 if __name__ == "__main__":
     # Modelos e números de exemplos RAG a testar
-    model_names = ["google/medgemma-1.5-4b-it"]
+    model_names = ["google/medgemma-27b-it"]
     rag_examples = [0, 3]
 
     for model_name in model_names:
