@@ -1,0 +1,31 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Traceback (most recent call last):
+  File "/home/CIN/agsl/miniconda3/envs/medgemma_env/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/CIN/agsl/miniconda3/envs/medgemma_env/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/CIN/agsl/experimento-medgemma/Test-cluster/src/main.py", line 464, in <module>
+    main(config)
+  File "/home/CIN/agsl/experimento-medgemma/Test-cluster/src/main.py", line 427, in main
+    pipeline = MedicalImageCaptioner(
+  File "/home/CIN/agsl/experimento-medgemma/Test-cluster/src/main.py", line 61, in __init__
+    self.captioner = CaptionerEngine(
+  File "/home/CIN/agsl/experimento-medgemma/Test-cluster/src/llm/llm_utils.py", line 25, in __init__
+    self.model = AutoModelForImageTextToText.from_pretrained(
+  File "/home/CIN/agsl/miniconda3/envs/medgemma_env/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 402, in from_pretrained
+    return model_class.from_pretrained(
+  File "/home/CIN/agsl/miniconda3/envs/medgemma_env/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4305, in from_pretrained
+    model = cls(config, *model_args, **model_kwargs)
+  File "/home/CIN/agsl/miniconda3/envs/medgemma_env/lib/python3.10/site-packages/transformers/models/gemma3/modeling_gemma3.py", line 932, in __init__
+    super().__init__(config)
+  File "/home/CIN/agsl/miniconda3/envs/medgemma_env/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1346, in __init__
+    self.config._attn_implementation_internal = self._check_and_adjust_attn_implementation(
+  File "/home/CIN/agsl/miniconda3/envs/medgemma_env/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1904, in _check_and_adjust_attn_implementation
+    applicable_attn_implementation = self.get_correct_attn_implementation(
+  File "/home/CIN/agsl/miniconda3/envs/medgemma_env/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1951, in get_correct_attn_implementation
+    self._flash_attn_can_dispatch(flash_attn_version=fa_version, is_init_check=is_init_check)
+  File "/home/CIN/agsl/miniconda3/envs/medgemma_env/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1690, in _flash_attn_can_dispatch
+    self._flash_attn_import_error(**FLASH_ATTENTION_COMPATIBILITY_MATRIX[flash_attn_version])
+  File "/home/CIN/agsl/miniconda3/envs/medgemma_env/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1645, in _flash_attn_import_error
+    raise ImportError(
+ImportError: FlashAttention2 has been toggled on, but it cannot be used due to the following error: the package for FlashAttention2 doesn't seem to be installed.

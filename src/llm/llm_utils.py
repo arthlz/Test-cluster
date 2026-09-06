@@ -25,6 +25,7 @@ class MedicalImageCaptioner:
             self.model = AutoModelForImageTextToText.from_pretrained(
                 self.model_name,
                 quantization_config=bnb_config,
+                attn_implementation = "sdpa", #  algoritmo para redução de consumo de memória e melhoria na velocidade
                 torch_dtype=torch.bfloat16,
                 device_map="auto"
             )
