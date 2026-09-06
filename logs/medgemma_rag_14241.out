@@ -1,0 +1,1235 @@
+==========================================
+Iniciando Job 14241 em Sat Sep  5 09:07:01 PM -03 2026
+Nó de execução: cluster-node7
+==========================================
+Copiando modelo e dataset para o SSD NVMe da GPU (isso leva uns 3 a 5 minutos)...
+Cópia concluída! Iniciando o MedGemma...
+Configured caching to use C: drive: /data/agsl_cache
+
+---> Running pipeline: google/medgemma-27b-it | RAG k=0 <---
+Loading local model: google/medgemma-27b-it with 4-bit quantization...
+Carregando modelo local google/medgemma-27b-it
+============================================================
+SETTING UP MEDICAL IMAGE CAPTIONING PIPELINE
+============================================================
+1. Loading ROCOv2 dataset from HuggingFace...
+Loading ROCOv2 dataset from HuggingFace: eltorio/ROCOv2-radiology
+Using cache directory: /data/agsl_cache
+Successfully loaded dataset with splits: ['train', 'validation', 'test']
+Train samples: 59962
+Validation samples: 9904
+Test samples: 9927
+   Dataset info: {'dataset_name': 'eltorio/ROCOv2-radiology', 'splits': ['train', 'validation', 'test'], 'train_samples': 59962, 'validation_samples': 9904, 'test_samples': 9927, 'features': ['image', 'image_id', 'caption', 'cui']}
+2. Loading existing vector database...
+   Found existing vector database at: /home/CIN/agsl/experimento-medgemma/Test-cluster/vectordb/image_vectordb
+Using device: cuda
+Loading CLIP model: openai/clip-vit-base-patch32
+Using cache directory: /data/agsl_cache
+Successfully loaded CLIP model: openai/clip-vit-base-patch32
+Vector database loaded from /home/CIN/agsl/experimento-medgemma/Test-cluster/vectordb/image_vectordb
+  - Index contains 10000 embeddings
+  - Metadata contains 10000 entries
+   Vector database loaded successfully!
+Pipeline setup complete!
+============================================================
+============================================================
+GENERATING CAPTIONS WITH RAG
+============================================================
+1. Sampling 300 validation images...
+Sampled 300 validation samples for evaluation
+   Processing 300 validation samples
+[21:15:35] Amostra 1/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided CT scan image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 367, 'output_tokens': 109, 'total_tokens': 476, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a contrast-enhanced angiogram. A catheter is positioned within a blood vessel, likel...
+   Token usage: {'input_tokens': 399, 'output_tokens': 161, 'total_tokens': 560, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial CT scan of the head and neck region. A large, well-defined, cystic or solid...
+   Token usage: {'input_tokens': 386, 'output_tokens': 125, 'total_tokens': 511, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 372, 'output_tokens': 44, 'total_tokens': 416, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an ultrasound of a hip joint. There are two measurements indicated by dashed lines a...
+   Token usage: {'input_tokens': 417, 'output_tokens': 119, 'total_tokens': 536, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 411, 'output_tokens': 119, 'total_tokens': 530, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided X-ray image, based on the visual evidence and the referen...
+   Token usage: {'input_tokens': 373, 'output_tokens': 113, 'total_tokens': 486, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The provided chest X-ray shows a nodule in the right upper lobe (indicated by the arrow). This findi...
+   Token usage: {'input_tokens': 399, 'output_tokens': 68, 'total_tokens': 467, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 372, 'output_tokens': 75, 'total_tokens': 447, 'cost_usd': 0.0}
+   Cost: $0.0000
+[21:20:03] Amostra 10/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: The image shows a transverse section of the chest, likely an MRI or CT scan. The structures visible ...
+   Token usage: {'input_tokens': 397, 'output_tokens': 364, 'total_tokens': 761, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 357, 'output_tokens': 372, 'total_tokens': 729, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial CT scan of the abdomen. There is a large, complex mass in the right upper q...
+   Token usage: {'input_tokens': 377, 'output_tokens': 174, 'total_tokens': 551, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 440, 'output_tokens': 89, 'total_tokens': 529, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided ultrasound image, based on the visual evidence and the st...
+   Token usage: {'input_tokens': 469, 'output_tokens': 90, 'total_tokens': 559, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an ultrasound scan of the liver. There is a hypoechoic lesion with a central echogen...
+   Token usage: {'input_tokens': 414, 'output_tokens': 134, 'total_tokens': 548, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 440, 'output_tokens': 87, 'total_tokens': 527, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the refer...
+   Token usage: {'input_tokens': 482, 'output_tokens': 149, 'total_tokens': 631, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided X-ray image, based on the visual evidence and the style o...
+   Token usage: {'input_tokens': 454, 'output_tokens': 81, 'total_tokens': 535, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a barium study of the upper gastrointestinal tract. The barium is filling the esopha...
+   Token usage: {'input_tokens': 372, 'output_tokens': 115, 'total_tokens': 487, 'cost_usd': 0.0}
+   Cost: $0.0000
+[21:27:06] Amostra 20/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 400, 'output_tokens': 78, 'total_tokens': 478, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 371, 'output_tokens': 93, 'total_tokens': 464, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The provided image is a T1-weighted MRI scan of the brain, likely axial, showing a lesion in the pos...
+   Token usage: {'input_tokens': 406, 'output_tokens': 98, 'total_tokens': 504, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a radiograph of a long bone, likely the femur or humerus, given the shape and metaph...
+   Token usage: {'input_tokens': 412, 'output_tokens': 512, 'total_tokens': 924, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption based on the image and the provided reference cases:
+
+**Clinical Caption:*...
+   Token usage: {'input_tokens': 354, 'output_tokens': 325, 'total_tokens': 679, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 493, 'output_tokens': 105, 'total_tokens': 598, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 371, 'output_tokens': 62, 'total_tokens': 433, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 406, 'output_tokens': 96, 'total_tokens': 502, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 398, 'output_tokens': 109, 'total_tokens': 507, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, drawing inspiration from the provided refere...
+   Token usage: {'input_tokens': 451, 'output_tokens': 104, 'total_tokens': 555, 'cost_usd': 0.0}
+   Cost: $0.0000
+[21:33:53] Amostra 30/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: The image shows a chest X-ray revealing a mass in the right upper lobe of the lung, along with assoc...
+   Token usage: {'input_tokens': 378, 'output_tokens': 49, 'total_tokens': 427, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 379, 'output_tokens': 82, 'total_tokens': 461, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the refer...
+   Token usage: {'input_tokens': 393, 'output_tokens': 94, 'total_tokens': 487, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 482, 'output_tokens': 85, 'total_tokens': 567, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 379, 'output_tokens': 58, 'total_tokens': 437, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided CT image, based on the visual evidence and the reference ...
+   Token usage: {'input_tokens': 390, 'output_tokens': 129, 'total_tokens': 519, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 424, 'output_tokens': 87, 'total_tokens': 511, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a coronary angiogram, likely of the left main coronary artery (LMCA) and its branche...
+   Token usage: {'input_tokens': 370, 'output_tokens': 373, 'total_tokens': 743, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 371, 'output_tokens': 198, 'total_tokens': 569, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 395, 'output_tokens': 80, 'total_tokens': 475, 'cost_usd': 0.0}
+   Cost: $0.0000
+[21:39:09] Amostra 40/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided CT image, based on the visual evidence and the style of t...
+   Token usage: {'input_tokens': 361, 'output_tokens': 60, 'total_tokens': 421, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, drawing inspiration from the provided refere...
+   Token usage: {'input_tokens': 384, 'output_tokens': 406, 'total_tokens': 790, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial CT scan of the abdomen. The yellow arrow points to a structure within the a...
+   Token usage: {'input_tokens': 416, 'output_tokens': 64, 'total_tokens': 480, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a contrast-enhanced angiogram, likely a pulmonary angiogram, focusing on the right h...
+   Token usage: {'input_tokens': 427, 'output_tokens': 217, 'total_tokens': 644, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided ultrasound image, based on the visual evidence and the st...
+   Token usage: {'input_tokens': 402, 'output_tokens': 76, 'total_tokens': 478, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 408, 'output_tokens': 82, 'total_tokens': 490, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here are a few clinical captions that could fit the image, considering the reference cases and the v...
+   Token usage: {'input_tokens': 362, 'output_tokens': 288, 'total_tokens': 650, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption based on the image and the provided reference cases:
+
+**Clinical Caption:*...
+   Token usage: {'input_tokens': 347, 'output_tokens': 80, 'total_tokens': 427, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 376, 'output_tokens': 114, 'total_tokens': 490, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 426, 'output_tokens': 69, 'total_tokens': 495, 'cost_usd': 0.0}
+   Cost: $0.0000
+[21:45:23] Amostra 50/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, drawing inspiration from the provided refere...
+   Token usage: {'input_tokens': 462, 'output_tokens': 94, 'total_tokens': 556, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial CT scan of the chest and upper abdomen. The primary finding is a large, wel...
+   Token usage: {'input_tokens': 394, 'output_tokens': 124, 'total_tokens': 518, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided chest X-ray image, based on the visual evidence and the s...
+   Token usage: {'input_tokens': 357, 'output_tokens': 44, 'total_tokens': 401, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided CT image, considering the visual evidence and the style o...
+   Token usage: {'input_tokens': 367, 'output_tokens': 58, 'total_tokens': 425, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the refer...
+   Token usage: {'input_tokens': 383, 'output_tokens': 91, 'total_tokens': 474, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial T2-weighted MRI of the brain. The key features are the bright signal intens...
+   Token usage: {'input_tokens': 378, 'output_tokens': 257, 'total_tokens': 635, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The chest X-ray shows a normal cardiac silhouette and lung fields. The arrow points to the trachea, ...
+   Token usage: {'input_tokens': 383, 'output_tokens': 41, 'total_tokens': 424, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 420, 'output_tokens': 124, 'total_tokens': 544, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a CT scan of the chest, likely focused on the great vessels. The key structures visi...
+   Token usage: {'input_tokens': 451, 'output_tokens': 424, 'total_tokens': 875, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 424, 'output_tokens': 144, 'total_tokens': 568, 'cost_usd': 0.0}
+   Cost: $0.0000
+[21:51:23] Amostra 60/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided chest X-ray image, drawing inspiration from the reference...
+   Token usage: {'input_tokens': 408, 'output_tokens': 91, 'total_tokens': 499, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 406, 'output_tokens': 102, 'total_tokens': 508, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 437, 'output_tokens': 111, 'total_tokens': 548, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 433, 'output_tokens': 96, 'total_tokens': 529, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a coronary angiogram, likely of the left main coronary artery (LMCA) and left anteri...
+   Token usage: {'input_tokens': 387, 'output_tokens': 300, 'total_tokens': 687, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 373, 'output_tokens': 315, 'total_tokens': 688, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 394, 'output_tokens': 83, 'total_tokens': 477, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided X-ray image, based on the visual evidence and the referen...
+   Token usage: {'input_tokens': 367, 'output_tokens': 68, 'total_tokens': 435, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 365, 'output_tokens': 57, 'total_tokens': 422, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a lateral view of the lumbar spine, likely an X-ray or fluoroscopy. There are two di...
+   Token usage: {'input_tokens': 386, 'output_tokens': 164, 'total_tokens': 550, 'cost_usd': 0.0}
+   Cost: $0.0000
+[21:57:18] Amostra 70/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided echocardiogram image, based on the visual evidence and th...
+   Token usage: {'input_tokens': 377, 'output_tokens': 109, 'total_tokens': 486, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided chest X-ray image, drawing inspiration from the reference...
+   Token usage: {'input_tokens': 432, 'output_tokens': 94, 'total_tokens': 526, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided chest X-ray image, based on the visual evidence and the s...
+   Token usage: {'input_tokens': 414, 'output_tokens': 104, 'total_tokens': 518, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial T2-weighted MRI of the brain. The key findings are hyperintensities in the ...
+   Token usage: {'input_tokens': 420, 'output_tokens': 90, 'total_tokens': 510, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 403, 'output_tokens': 91, 'total_tokens': 494, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The provided image is an axial T2-weighted MRI scan of the brain. The red arrow points to a lesion l...
+   Token usage: {'input_tokens': 399, 'output_tokens': 301, 'total_tokens': 700, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a chest X-ray with findings suggestive of pneumomediastinum (air in the mediastinum)...
+   Token usage: {'input_tokens': 357, 'output_tokens': 109, 'total_tokens': 466, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial T2-weighted MRI of the brain and orbits. The structures appear normal, with...
+   Token usage: {'input_tokens': 370, 'output_tokens': 81, 'total_tokens': 451, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 428, 'output_tokens': 80, 'total_tokens': 508, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 390, 'output_tokens': 167, 'total_tokens': 557, 'cost_usd': 0.0}
+   Cost: $0.0000
+[22:02:34] Amostra 80/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: The image shows a chest X-ray. The mediastinum appears normal in width and contour. There are no sig...
+   Token usage: {'input_tokens': 357, 'output_tokens': 97, 'total_tokens': 454, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 394, 'output_tokens': 97, 'total_tokens': 491, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial T2-weighted MRI of the brain. There is a large, well-defined, cystic lesion...
+   Token usage: {'input_tokens': 390, 'output_tokens': 110, 'total_tokens': 500, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a catheter (likely a guidewire or microcatheter) navigating through a blood vessel, ...
+   Token usage: {'input_tokens': 421, 'output_tokens': 427, 'total_tokens': 848, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided X-ray image, based on the visual evidence and the style o...
+   Token usage: {'input_tokens': 371, 'output_tokens': 73, 'total_tokens': 444, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 405, 'output_tokens': 91, 'total_tokens': 496, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 402, 'output_tokens': 73, 'total_tokens': 475, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided chest X-ray image, considering the visual features and th...
+   Token usage: {'input_tokens': 369, 'output_tokens': 78, 'total_tokens': 447, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 466, 'output_tokens': 101, 'total_tokens': 567, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption based on the image and the provided reference cases:
+
+**Cardiac Catheteriz...
+   Token usage: {'input_tokens': 372, 'output_tokens': 40, 'total_tokens': 412, 'cost_usd': 0.0}
+   Cost: $0.0000
+[22:07:39] Amostra 90/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: The image shows a coronal CT scan of the pelvis. There are two distinct cystic structures, indicated...
+   Token usage: {'input_tokens': 486, 'output_tokens': 86, 'total_tokens': 572, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided MRI image, based on the visual evidence and the reference...
+   Token usage: {'input_tokens': 375, 'output_tokens': 73, 'total_tokens': 448, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided CT image, drawing inspiration from the reference cases an...
+   Token usage: {'input_tokens': 481, 'output_tokens': 95, 'total_tokens': 576, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The provided image is a chest X-ray (CXR) showing a mass-like opacity in the right lower lung field,...
+   Token usage: {'input_tokens': 478, 'output_tokens': 367, 'total_tokens': 845, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial T2-weighted MRI of the brain. The structure indicated by the arrows is like...
+   Token usage: {'input_tokens': 463, 'output_tokens': 89, 'total_tokens': 552, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 512, 'output_tokens': 90, 'total_tokens': 602, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided MRI image, based on the visual evidence and the reference...
+   Token usage: {'input_tokens': 404, 'output_tokens': 94, 'total_tokens': 498, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 362, 'output_tokens': 102, 'total_tokens': 464, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a chest X-ray. The arrows point to the following structures:
+1.  **Arrow 1:** Points...
+   Token usage: {'input_tokens': 421, 'output_tokens': 188, 'total_tokens': 609, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided X-ray image, based on the visual evidence and the style o...
+   Token usage: {'input_tokens': 475, 'output_tokens': 85, 'total_tokens': 560, 'cost_usd': 0.0}
+   Cost: $0.0000
+[22:13:05] Amostra 100/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 369, 'output_tokens': 72, 'total_tokens': 441, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 426, 'output_tokens': 120, 'total_tokens': 546, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 424, 'output_tokens': 115, 'total_tokens': 539, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, considering the visual evidence and the re...
+   Token usage: {'input_tokens': 381, 'output_tokens': 66, 'total_tokens': 447, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, following the style of the reference cases...
+   Token usage: {'input_tokens': 391, 'output_tokens': 45, 'total_tokens': 436, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 409, 'output_tokens': 63, 'total_tokens': 472, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a transesophageal echocardiogram (TEE) view, likely a mid-esophageal long-axis view ...
+   Token usage: {'input_tokens': 412, 'output_tokens': 358, 'total_tokens': 770, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 496, 'output_tokens': 92, 'total_tokens': 588, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 466, 'output_tokens': 120, 'total_tokens': 586, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial MRI scan of the brain. There is a small, bright white focus (indicated by t...
+   Token usage: {'input_tokens': 420, 'output_tokens': 83, 'total_tokens': 503, 'cost_usd': 0.0}
+   Cost: $0.0000
+[22:17:57] Amostra 110/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: The image shows a fluoroscopic view of the chest, likely during a cardiac catheterization procedure....
+   Token usage: {'input_tokens': 356, 'output_tokens': 82, 'total_tokens': 438, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 416, 'output_tokens': 72, 'total_tokens': 488, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 397, 'output_tokens': 106, 'total_tokens': 503, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a CT scan of the spine. There is a significant bony defect (indicated by arrows) in ...
+   Token usage: {'input_tokens': 395, 'output_tokens': 85, 'total_tokens': 480, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 444, 'output_tokens': 100, 'total_tokens': 544, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 429, 'output_tokens': 99, 'total_tokens': 528, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an anteroposterior (AP) radiograph of the knee joint. The bones appear intact, with ...
+   Token usage: {'input_tokens': 372, 'output_tokens': 67, 'total_tokens': 439, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided X-ray image, based on the visual evidence and the style o...
+   Token usage: {'input_tokens': 396, 'output_tokens': 116, 'total_tokens': 512, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a coronal CT scan of the abdomen and pelvis. There is a large, complex, heterogeneou...
+   Token usage: {'input_tokens': 395, 'output_tokens': 130, 'total_tokens': 525, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the refer...
+   Token usage: {'input_tokens': 402, 'output_tokens': 92, 'total_tokens': 494, 'cost_usd': 0.0}
+   Cost: $0.0000
+[22:22:02] Amostra 120/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: The image shows an echocardiogram, likely a transthoracic echocardiogram (TTE), focusing on the left...
+   Token usage: {'input_tokens': 404, 'output_tokens': 348, 'total_tokens': 752, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the refer...
+   Token usage: {'input_tokens': 405, 'output_tokens': 87, 'total_tokens': 492, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a contrast-enhanced angiogram, likely a ventriculogram or aortogram, revealing an ab...
+   Token usage: {'input_tokens': 429, 'output_tokens': 72, 'total_tokens': 501, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial CT scan of the neck. The red arrow points to a structure located posterior ...
+   Token usage: {'input_tokens': 403, 'output_tokens': 214, 'total_tokens': 617, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 403, 'output_tokens': 77, 'total_tokens': 480, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, considering the visual evidence and the re...
+   Token usage: {'input_tokens': 366, 'output_tokens': 102, 'total_tokens': 468, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The provided image is an axial CT scan of the brain. It shows diffuse, bilateral, and relatively sym...
+   Token usage: {'input_tokens': 379, 'output_tokens': 147, 'total_tokens': 526, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided X-ray image, considering the visual evidence and the styl...
+   Token usage: {'input_tokens': 405, 'output_tokens': 104, 'total_tokens': 509, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 422, 'output_tokens': 69, 'total_tokens': 491, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 415, 'output_tokens': 371, 'total_tokens': 786, 'cost_usd': 0.0}
+   Cost: $0.0000
+[22:28:50] Amostra 130/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: The image shows a normal chest X-ray. The lungs are clear without evidence of consolidation, effusio...
+   Token usage: {'input_tokens': 420, 'output_tokens': 52, 'total_tokens': 472, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a lateral cervical spine radiograph. There are multiple levels of spinal fusion with...
+   Token usage: {'input_tokens': 388, 'output_tokens': 58, 'total_tokens': 446, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 438, 'output_tokens': 408, 'total_tokens': 846, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a cross-sectional view, likely an MRI or CT scan, of the neck and upper chest region...
+   Token usage: {'input_tokens': 371, 'output_tokens': 178, 'total_tokens': 549, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 394, 'output_tokens': 119, 'total_tokens': 513, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 401, 'output_tokens': 88, 'total_tokens': 489, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 440, 'output_tokens': 84, 'total_tokens': 524, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 420, 'output_tokens': 70, 'total_tokens': 490, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The provided image shows an axial T2-weighted MRI of the brain. The key finding is a large, well-def...
+   Token usage: {'input_tokens': 490, 'output_tokens': 447, 'total_tokens': 937, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 451, 'output_tokens': 107, 'total_tokens': 558, 'cost_usd': 0.0}
+   Cost: $0.0000
+[22:35:44] Amostra 140/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: The provided image is a sagittal view of a brain MRI. It shows the posterior fossa structures, inclu...
+   Token usage: {'input_tokens': 381, 'output_tokens': 136, 'total_tokens': 517, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 402, 'output_tokens': 111, 'total_tokens': 513, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 381, 'output_tokens': 70, 'total_tokens': 451, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided echocardiogram image, based on the visual evidence and th...
+   Token usage: {'input_tokens': 483, 'output_tokens': 79, 'total_tokens': 562, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a Diffusion-Weighted Imaging (DWI) scan of the brain. There is a bright, hyperintens...
+   Token usage: {'input_tokens': 405, 'output_tokens': 93, 'total_tokens': 498, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a chest X-ray with a prominent heart silhouette and lung fields. The lung fields app...
+   Token usage: {'input_tokens': 386, 'output_tokens': 169, 'total_tokens': 555, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 386, 'output_tokens': 108, 'total_tokens': 494, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption based on the image and the provided reference cases:
+
+**Clinical Caption:*...
+   Token usage: {'input_tokens': 419, 'output_tokens': 108, 'total_tokens': 527, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a contrast-enhanced CT scan of the chest. There are filling defects within the pulmo...
+   Token usage: {'input_tokens': 418, 'output_tokens': 51, 'total_tokens': 469, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided chest X-ray image, drawing inspiration from the reference...
+   Token usage: {'input_tokens': 422, 'output_tokens': 102, 'total_tokens': 524, 'cost_usd': 0.0}
+   Cost: $0.0000
+[22:40:09] Amostra 150/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, considering the visual evidence and the prov...
+   Token usage: {'input_tokens': 423, 'output_tokens': 86, 'total_tokens': 509, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 399, 'output_tokens': 311, 'total_tokens': 710, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 423, 'output_tokens': 73, 'total_tokens': 496, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 430, 'output_tokens': 121, 'total_tokens': 551, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a cross-sectional view, likely an echocardiogram, focusing on the heart structures. ...
+   Token usage: {'input_tokens': 423, 'output_tokens': 93, 'total_tokens': 516, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the refer...
+   Token usage: {'input_tokens': 377, 'output_tokens': 87, 'total_tokens': 464, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an abdominal ultrasound. The liver appears normal in echotexture and size. The gallb...
+   Token usage: {'input_tokens': 387, 'output_tokens': 73, 'total_tokens': 460, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here are a few clinical caption options for the provided medical image, drawing inspiration from the...
+   Token usage: {'input_tokens': 442, 'output_tokens': 419, 'total_tokens': 861, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 395, 'output_tokens': 142, 'total_tokens': 537, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 381, 'output_tokens': 95, 'total_tokens': 476, 'cost_usd': 0.0}
+   Cost: $0.0000
+[22:46:35] Amostra 160/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: The image shows a cerebral angiogram, likely a digital subtraction angiogram (DSA), depicting the va...
+   Token usage: {'input_tokens': 519, 'output_tokens': 97, 'total_tokens': 616, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 407, 'output_tokens': 99, 'total_tokens': 506, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a grayscale ultrasound scan of the abdomen, likely focusing on the liver and spleen....
+   Token usage: {'input_tokens': 447, 'output_tokens': 260, 'total_tokens': 707, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 387, 'output_tokens': 62, 'total_tokens': 449, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 376, 'output_tokens': 96, 'total_tokens': 472, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a black and white axial MRI scan of the head. There is a visible lesion or mass with...
+   Token usage: {'input_tokens': 379, 'output_tokens': 124, 'total_tokens': 503, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided CT image, based on the visual evidence and the style of t...
+   Token usage: {'input_tokens': 412, 'output_tokens': 78, 'total_tokens': 490, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the refer...
+   Token usage: {'input_tokens': 449, 'output_tokens': 107, 'total_tokens': 556, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided X-ray image, based on the visual evidence and the style o...
+   Token usage: {'input_tokens': 363, 'output_tokens': 106, 'total_tokens': 469, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a cross-sectional view, likely from an MRI scan, focusing on a joint structure. Ther...
+   Token usage: {'input_tokens': 459, 'output_tokens': 452, 'total_tokens': 911, 'cost_usd': 0.0}
+   Cost: $0.0000
+[22:52:56] Amostra 170/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided dental X-ray image, considering the visual evidence and t...
+   Token usage: {'input_tokens': 372, 'output_tokens': 55, 'total_tokens': 427, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a sagittal view, likely a CT or MRI scan, of the head and neck region. A distinct st...
+   Token usage: {'input_tokens': 458, 'output_tokens': 298, 'total_tokens': 756, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 375, 'output_tokens': 63, 'total_tokens': 438, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 378, 'output_tokens': 82, 'total_tokens': 460, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a contrast study of the gastrointestinal tract. The contrast material is filling the...
+   Token usage: {'input_tokens': 370, 'output_tokens': 59, 'total_tokens': 429, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 438, 'output_tokens': 103, 'total_tokens': 541, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 383, 'output_tokens': 59, 'total_tokens': 442, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a contrast-enhanced angiogram of the neck vessels. The focus is on the right common ...
+   Token usage: {'input_tokens': 429, 'output_tokens': 85, 'total_tokens': 514, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a sagittal view of a pelvic MRI. There is a well-defined, cystic structure (indicate...
+   Token usage: {'input_tokens': 466, 'output_tokens': 75, 'total_tokens': 541, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a subtraction angiogram of the head and neck vasculature. The internal carotid arter...
+   Token usage: {'input_tokens': 442, 'output_tokens': 158, 'total_tokens': 600, 'cost_usd': 0.0}
+   Cost: $0.0000
+[22:57:23] Amostra 180/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 433, 'output_tokens': 136, 'total_tokens': 569, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 370, 'output_tokens': 278, 'total_tokens': 648, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption based on the image and the provided reference cases:
+
+**Clinical Caption:*...
+   Token usage: {'input_tokens': 345, 'output_tokens': 200, 'total_tokens': 545, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided ultrasound image, based on the visual evidence and the re...
+   Token usage: {'input_tokens': 413, 'output_tokens': 189, 'total_tokens': 602, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a CT scan of the abdomen. There is a large, well-defined, cystic lesion in the upper...
+   Token usage: {'input_tokens': 401, 'output_tokens': 63, 'total_tokens': 464, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, drawing inspiration from the provided refere...
+   Token usage: {'input_tokens': 390, 'output_tokens': 78, 'total_tokens': 468, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 424, 'output_tokens': 100, 'total_tokens': 524, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial T2-weighted MRI of the brain. There is a lesion in the region of the hypoth...
+   Token usage: {'input_tokens': 538, 'output_tokens': 117, 'total_tokens': 655, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 401, 'output_tokens': 81, 'total_tokens': 482, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 424, 'output_tokens': 83, 'total_tokens': 507, 'cost_usd': 0.0}
+   Cost: $0.0000
+[23:03:04] Amostra 190/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: The image shows a radiograph of a long bone, likely the femur or tibia, with an intramedullary nail ...
+   Token usage: {'input_tokens': 383, 'output_tokens': 267, 'total_tokens': 650, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 368, 'output_tokens': 86, 'total_tokens': 454, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 448, 'output_tokens': 126, 'total_tokens': 574, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided ultrasound image, based on the visual evidence and the st...
+   Token usage: {'input_tokens': 362, 'output_tokens': 108, 'total_tokens': 470, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided echocardiogram image, drawing inspiration from the refere...
+   Token usage: {'input_tokens': 534, 'output_tokens': 103, 'total_tokens': 637, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a transthoracic echocardiogram (TTE) in the apical four-chamber view. The heart cham...
+   Token usage: {'input_tokens': 384, 'output_tokens': 110, 'total_tokens': 494, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a chest X-ray. A catheter is visible, and the arrow points to a structure that appea...
+   Token usage: {'input_tokens': 398, 'output_tokens': 404, 'total_tokens': 802, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 428, 'output_tokens': 138, 'total_tokens': 566, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial CT scan of the abdomen. The liver appears enlarged and heterogeneous in den...
+   Token usage: {'input_tokens': 399, 'output_tokens': 107, 'total_tokens': 506, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a chest X-ray. The lung fields appear clear without significant opacities or infiltr...
+   Token usage: {'input_tokens': 391, 'output_tokens': 67, 'total_tokens': 458, 'cost_usd': 0.0}
+   Cost: $0.0000
+[23:09:35] Amostra 200/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the refer...
+   Token usage: {'input_tokens': 422, 'output_tokens': 450, 'total_tokens': 872, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 449, 'output_tokens': 132, 'total_tokens': 581, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 382, 'output_tokens': 285, 'total_tokens': 667, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a lateral radiograph of a foot, likely an ankle, with a focus on the bony structures...
+   Token usage: {'input_tokens': 395, 'output_tokens': 146, 'total_tokens': 541, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 459, 'output_tokens': 134, 'total_tokens': 593, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided echocardiogram image, based on the visual evidence and th...
+   Token usage: {'input_tokens': 376, 'output_tokens': 101, 'total_tokens': 477, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 366, 'output_tokens': 90, 'total_tokens': 456, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a contrast-enhanced study, likely a barium swallow or upper GI series, revealing a d...
+   Token usage: {'input_tokens': 429, 'output_tokens': 82, 'total_tokens': 511, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 411, 'output_tokens': 84, 'total_tokens': 495, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 449, 'output_tokens': 122, 'total_tokens': 571, 'cost_usd': 0.0}
+   Cost: $0.0000
+[23:16:33] Amostra 210/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 425, 'output_tokens': 75, 'total_tokens': 500, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 576, 'output_tokens': 144, 'total_tokens': 720, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The provided image is a CT scan of the abdomen. It shows a large, complex mass in the liver, likely ...
+   Token usage: {'input_tokens': 385, 'output_tokens': 300, 'total_tokens': 685, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a CT scan of the abdomen. There is a large, low-density lesion in the liver, indicat...
+   Token usage: {'input_tokens': 383, 'output_tokens': 253, 'total_tokens': 636, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, considering the visual evidence and the prov...
+   Token usage: {'input_tokens': 389, 'output_tokens': 78, 'total_tokens': 467, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided MRI image, based on the visual evidence and the reference...
+   Token usage: {'input_tokens': 390, 'output_tokens': 129, 'total_tokens': 519, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 397, 'output_tokens': 261, 'total_tokens': 658, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 474, 'output_tokens': 87, 'total_tokens': 561, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 439, 'output_tokens': 316, 'total_tokens': 755, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here are a few options for a clinical caption, based on the image and the provided references:
+
+**Op...
+   Token usage: {'input_tokens': 346, 'output_tokens': 234, 'total_tokens': 580, 'cost_usd': 0.0}
+   Cost: $0.0000
+[23:24:34] Amostra 220/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: The image shows a lateral view of the lumbar spine, likely an X-ray. There is a metallic implant vis...
+   Token usage: {'input_tokens': 415, 'output_tokens': 116, 'total_tokens': 531, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a CT scan of the brain. There is a hyperdense area in the right middle cerebral arte...
+   Token usage: {'input_tokens': 369, 'output_tokens': 44, 'total_tokens': 413, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided echocardiogram image, drawing inspiration from the refere...
+   Token usage: {'input_tokens': 469, 'output_tokens': 114, 'total_tokens': 583, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided X-ray image, based on the visual evidence and the style o...
+   Token usage: {'input_tokens': 452, 'output_tokens': 90, 'total_tokens': 542, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 402, 'output_tokens': 93, 'total_tokens': 495, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a contrast study, likely a cholangiogram or related procedure, visualizing the bilia...
+   Token usage: {'input_tokens': 447, 'output_tokens': 140, 'total_tokens': 587, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 412, 'output_tokens': 85, 'total_tokens': 497, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the refer...
+   Token usage: {'input_tokens': 414, 'output_tokens': 68, 'total_tokens': 482, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 405, 'output_tokens': 107, 'total_tokens': 512, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a contrast-enhanced CT angiogram of the chest. The arrow points to the aorta (Ao), s...
+   Token usage: {'input_tokens': 440, 'output_tokens': 72, 'total_tokens': 512, 'cost_usd': 0.0}
+   Cost: $0.0000
+[23:28:34] Amostra 230/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided mammogram image, drawing inspiration from the reference c...
+   Token usage: {'input_tokens': 420, 'output_tokens': 96, 'total_tokens': 516, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 426, 'output_tokens': 97, 'total_tokens': 523, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 504, 'output_tokens': 134, 'total_tokens': 638, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, considering the visual evidence and the prov...
+   Token usage: {'input_tokens': 343, 'output_tokens': 281, 'total_tokens': 624, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial CT scan of the brain. The structures visible include the orbits, frontal lo...
+   Token usage: {'input_tokens': 433, 'output_tokens': 452, 'total_tokens': 885, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 389, 'output_tokens': 78, 'total_tokens': 467, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here are a few clinical captions that could describe the provided chest X-ray image, considering the...
+   Token usage: {'input_tokens': 353, 'output_tokens': 405, 'total_tokens': 758, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the refer...
+   Token usage: {'input_tokens': 400, 'output_tokens': 115, 'total_tokens': 515, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a venogram, likely of the lower extremities or pelvis, revealing a complex network o...
+   Token usage: {'input_tokens': 374, 'output_tokens': 76, 'total_tokens': 450, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 468, 'output_tokens': 105, 'total_tokens': 573, 'cost_usd': 0.0}
+   Cost: $0.0000
+[23:36:25] Amostra 240/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 416, 'output_tokens': 191, 'total_tokens': 607, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 392, 'output_tokens': 104, 'total_tokens': 496, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial CT scan of the abdomen. The liver appears relatively normal in density, alt...
+   Token usage: {'input_tokens': 378, 'output_tokens': 483, 'total_tokens': 861, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial CT scan of the orbits and sinuses. There is a lesion in the right sphenoid ...
+   Token usage: {'input_tokens': 447, 'output_tokens': 95, 'total_tokens': 542, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 440, 'output_tokens': 105, 'total_tokens': 545, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here are a few clinical caption options for the provided X-ray image, considering the reference case...
+   Token usage: {'input_tokens': 382, 'output_tokens': 512, 'total_tokens': 894, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Based on the image, the catheter tip is positioned in the left main coronary artery (LMCA). The cont...
+   Token usage: {'input_tokens': 370, 'output_tokens': 105, 'total_tokens': 475, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 414, 'output_tokens': 120, 'total_tokens': 534, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided echocardiogram image, based on the visual evidence and th...
+   Token usage: {'input_tokens': 421, 'output_tokens': 112, 'total_tokens': 533, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an axial CT scan of the head and neck region. The red arrow points to the parotid gl...
+   Token usage: {'input_tokens': 376, 'output_tokens': 284, 'total_tokens': 660, 'cost_usd': 0.0}
+   Cost: $0.0000
+[23:45:25] Amostra 250/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: The provided image is an axial T2-weighted MRI scan of the brain. It shows a prominent sulcal patter...
+   Token usage: {'input_tokens': 433, 'output_tokens': 448, 'total_tokens': 881, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a lateral radiograph of the knee joint. The patella is visible, along with the dista...
+   Token usage: {'input_tokens': 444, 'output_tokens': 85, 'total_tokens': 529, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 459, 'output_tokens': 152, 'total_tokens': 611, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 428, 'output_tokens': 90, 'total_tokens': 518, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 355, 'output_tokens': 71, 'total_tokens': 426, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided CT image, drawing inspiration from the reference cases an...
+   Token usage: {'input_tokens': 406, 'output_tokens': 102, 'total_tokens': 508, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an ultrasound of a pelvic mass. The mass appears complex, with mixed echogenicity (h...
+   Token usage: {'input_tokens': 404, 'output_tokens': 107, 'total_tokens': 511, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided chest X-ray image, following the style of the reference c...
+   Token usage: {'input_tokens': 373, 'output_tokens': 56, 'total_tokens': 429, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a transvaginal ultrasound of the uterus. The uterus appears to be anteverted. There ...
+   Token usage: {'input_tokens': 421, 'output_tokens': 112, 'total_tokens': 533, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided chest X-ray image, considering the visual findings and th...
+   Token usage: {'input_tokens': 371, 'output_tokens': 109, 'total_tokens': 480, 'cost_usd': 0.0}
+   Cost: $0.0000
+[23:51:07] Amostra 260/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption based on the image and the provided reference cases:
+
+**Clinical Caption:*...
+   Token usage: {'input_tokens': 327, 'output_tokens': 107, 'total_tokens': 434, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here are a few clinical caption options for the provided dental X-ray image, considering the visual ...
+   Token usage: {'input_tokens': 367, 'output_tokens': 204, 'total_tokens': 571, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption based on the image and the provided reference cases:
+
+**Clinical Caption:*...
+   Token usage: {'input_tokens': 438, 'output_tokens': 122, 'total_tokens': 560, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 398, 'output_tokens': 85, 'total_tokens': 483, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 406, 'output_tokens': 83, 'total_tokens': 489, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided CT scan image, drawing inspiration from the reference cas...
+   Token usage: {'input_tokens': 392, 'output_tokens': 93, 'total_tokens': 485, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows an echocardiogram, likely a transthoracic echocardiogram (TTE) given the typical vie...
+   Token usage: {'input_tokens': 410, 'output_tokens': 175, 'total_tokens': 585, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided echocardiogram image, based on the visual evidence and th...
+   Token usage: {'input_tokens': 386, 'output_tokens': 125, 'total_tokens': 511, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 418, 'output_tokens': 125, 'total_tokens': 543, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the refer...
+   Token usage: {'input_tokens': 431, 'output_tokens': 71, 'total_tokens': 502, 'cost_usd': 0.0}
+   Cost: $0.0000
+[23:56:14] Amostra 270/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, considering the visual evidence and the prov...
+   Token usage: {'input_tokens': 356, 'output_tokens': 80, 'total_tokens': 436, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 358, 'output_tokens': 284, 'total_tokens': 642, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a sagittal view of the pelvic region, likely from an MRI scan. The arrow points to t...
+   Token usage: {'input_tokens': 388, 'output_tokens': 275, 'total_tokens': 663, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 447, 'output_tokens': 87, 'total_tokens': 534, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 406, 'output_tokens': 109, 'total_tokens': 515, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, considering the visual evidence and the prov...
+   Token usage: {'input_tokens': 364, 'output_tokens': 108, 'total_tokens': 472, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here are a few clinical caption options for the provided X-ray image, considering the reference case...
+   Token usage: {'input_tokens': 375, 'output_tokens': 240, 'total_tokens': 615, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a cross-sectional view of the lower spine and pelvis, likely an MRI scan. The struct...
+   Token usage: {'input_tokens': 437, 'output_tokens': 203, 'total_tokens': 640, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 394, 'output_tokens': 71, 'total_tokens': 465, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the style...
+   Token usage: {'input_tokens': 388, 'output_tokens': 68, 'total_tokens': 456, 'cost_usd': 0.0}
+   Cost: $0.0000
+[00:02:45] Amostra 280/300 em processamento...
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 452, 'output_tokens': 396, 'total_tokens': 848, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, drawing inspiration from the provided refere...
+   Token usage: {'input_tokens': 411, 'output_tokens': 80, 'total_tokens': 491, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided ultrasound image, based on the visual evidence and the re...
+   Token usage: {'input_tokens': 412, 'output_tokens': 134, 'total_tokens': 546, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: The image shows a lateral view of the lumbar spine, likely an X-ray or CT scan. The vertebral bodies...
+   Token usage: {'input_tokens': 445, 'output_tokens': 88, 'total_tokens': 533, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the provided medical image, based on the visual evidence and the provi...
+   Token usage: {'input_tokens': 364, 'output_tokens': 73, 'total_tokens': 437, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 419, 'output_tokens': 82, 'total_tokens': 501, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 365, 'output_tokens': 86, 'total_tokens': 451, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG
+   Generated caption: Here's a clinical caption for the target medical image, based on the visual evidence and the provide...
+   Token usage: {'input_tokens': 422, 'output_tokens': 88, 'total_tokens': 510, 'cost_usd': 0.0}
+   Cost: $0.0000
+   Found 3 similar images for RAG

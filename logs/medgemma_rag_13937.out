@@ -1,0 +1,15 @@
+==========================================
+Iniciando Job 13937 em Mon Aug 31 07:59:52 PM -03 2026
+Nó de execução: cluster-node7
+==========================================
+Configured caching to use C: drive: /home/CIN/agsl/.cache/huggingface
+
+---> Running pipeline: google/medgemma-27b-it | RAG k=0 <---
+Loading local model: google/medgemma-27b-it with 4-bit quantization...
+Carregando modelo local google/medgemma-27b-it
+============================================================
+SETTING UP MEDICAL IMAGE CAPTIONING PIPELINE
+============================================================
+1. Loading ROCOv2 dataset from HuggingFace...
+Loading ROCOv2 dataset from HuggingFace: eltorio/ROCOv2-radiology
+Using cache directory: /home/CIN/agsl/.cache/huggingface

@@ -33,7 +33,7 @@ class Config:
         if custom_cache:
             self.cache_dir = Path(custom_cache)
         else:
-            self.cache_dir = Path.home() / ".cache" / "huggingface"
+            self.cache_dir = Path("/data/agsl_cache")
         
         # Create cache directory
         self.cache_dir.mkdir(parents=True, exist_ok=True)

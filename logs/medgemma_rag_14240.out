@@ -1,0 +1,14 @@
+==========================================
+Iniciando Job 14240 em Sat Sep  5 08:55:26 PM -03 2026
+Nó de execução: cluster-node7
+==========================================
+Copiando modelo e dataset para o SSD NVMe da GPU (isso leva uns 3 a 5 minutos)...
+Cópia concluída! Iniciando o MedGemma...
+Configured caching to use C: drive: /tmp/agsl_cache
+
+---> Running pipeline: google/medgemma-27b-it | RAG k=0 <---
+Loading local model: google/medgemma-27b-it with 4-bit quantization...
+==========================================
+ [ERRO] O pipeline falhou com código 1 em Sat Sep  5 09:03:41 PM -03 2026!
+Consulte o arquivo logs/medgemma_rag_14240.err para mais detalhes.
+==========================================

@@ -1,0 +1,12 @@
+==========================================
+Iniciando Job 14236 em Sat Sep  5 08:38:08 PM -03 2026
+Nó de execução: cluster-node7
+==========================================
+Configured caching to use C: drive: /tmp/agsl_cache
+
+---> Running pipeline: google/medgemma-27b-it | RAG k=0 <---
+Loading local model: google/medgemma-27b-it with 4-bit quantization...
+==========================================
+ [ERRO] O pipeline falhou com código 1 em Sat Sep  5 08:38:47 PM -03 2026!
+Consulte o arquivo logs/medgemma_rag_14236.err para mais detalhes.
+==========================================
