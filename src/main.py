@@ -3,9 +3,12 @@ import os
 import random
 from datetime import datetime
 from pathlib import Path
+
 from typing import List, Dict, Any
 
 from dotenv import load_dotenv
+
+import time
 
 # Import configuration first to set up environment
 from .config import get_config, update_config, Config
@@ -149,6 +152,8 @@ class MedicalImageCaptioner:
                 print(f"[{datetime.now().strftime('%H:%M:%S')}] Amostra {i + 1}/{total_samples} em processamento...", flush=True)
             
             try:
+                start_time = time.time()
+
                 if self.num_rag_examples > 0:
                     # Find similar images for RAG
                     similar_images = self.vectordb.search_similar_images(
@@ -156,7 +161,7 @@ class MedicalImageCaptioner:
                         k=self.num_rag_examples
                     )
                 
-                    print(f"   Found {len(similar_images)} similar images for RAG")
+                    print(f"Found {len(similar_images)} similar images for RAG")
                 
                     # Generate caption with RAG
                     caption_data, token_usage, examples_used = self.captioner.generate_caption_with_rag(
@@ -165,17 +170,20 @@ class MedicalImageCaptioner:
                     )
                 
                 else:
-                    print("   RAG disabled, generating caption without examples")
+                    print("RAG disabled, generating caption without examples")
                     caption_data, token_usage = self.captioner.generate_caption(
                         sample['image']
                     )
                     examples_used = []
 
+                end_time = time.time()
+                analysis_time_seconds = end_time - start_time
                 # Prepare result data
                 result = {
                     "image_id": sample['image_id'],
                     "ground_truth_caption": sample['caption'],
                     "generated_caption": caption_data.get('caption', ''),
+                    "analysis_time_seconds": round(analysis_time_seconds, 2),
                     "token_usage": token_usage,
                     "rag_examples": [
                         {
@@ -198,8 +206,8 @@ class MedicalImageCaptioner:
                 
                 print(f"   Generated caption: {caption_data.get('caption', '')[:100]}...")
                 print(f"   Token usage: {token_usage}")
+                print(f"   Time taken: {analysis_time_seconds:.2f} seconds}"
                 print(f"   Cost: ${token_usage.get('cost_usd', 0.0):.4f}")
-                
             except Exception as e:
                 print(f"   Error processing sample {sample['image_id']}: {e}")
                 
@@ -208,6 +216,7 @@ class MedicalImageCaptioner:
                     "image_id": sample['image_id'],
                     "ground_truth_caption": sample['caption'],
                     "generated_caption": f"Error: {str(e)}",
+                    "analysis_time_seconds": 0.0,
                     "token_usage": {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0, "cost_usd": 0.0},
                     "rag_examples": [],
                     "timestamp": datetime.now().isoformat(),
