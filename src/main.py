@@ -206,7 +206,7 @@ class MedicalImageCaptioner:
                 
                 print(f"   Generated caption: {caption_data.get('caption', '')[:100]}...")
                 print(f"   Token usage: {token_usage}")
-                print(f"   Time taken: {analysis_time_seconds:.2f} seconds}")
+                print(f"   Time taken: {analysis_time_seconds:.2f} seconds")
                 print(f"   Cost: ${token_usage.get('cost_usd', 0.0):.4f}")
             except Exception as e:
                 print(f"   Error processing sample {sample['image_id']}: {e}")
