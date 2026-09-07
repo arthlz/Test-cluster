@@ -11,20 +11,12 @@ class MedicalImageCaptioner:
         self.max_tokens = max_tokens
         
         if self.provider == "huggingface" or "medgemma" in self.model_name.lower():
-            print(f"Loading local model: {self.model_name} with 4-bit quantization...")
+            print(f"Loading local model: {self.model_name}")
             
-            # Configuração de quantização para GPUs com 24GB-40GB de VRAM
-            bnb_config = BitsAndBytesConfig(
-                load_in_4bit=True,
-                bnb_4bit_quant_type="nf4",
-                bnb_4bit_compute_dtype=torch.bfloat16,
-                bnb_4bit_use_double_quant=True
-            )
-
             self.processor = AutoProcessor.from_pretrained(self.model_name)
+
             self.model = AutoModelForImageTextToText.from_pretrained(
                 self.model_name,
-                quantization_config=bnb_config,
                 attn_implementation = "sdpa", #  algoritmo para redução de consumo de memória e melhoria na velocidade
                 torch_dtype=torch.bfloat16,
                 device_map="auto"
@@ -60,7 +52,7 @@ class MedicalImageCaptioner:
             
             prompt_text = (
                 f"{rag_context}\n"
-                "Based on the visual evidence and the reference cases above, generate a clinical caption for this target medical image."
+                "You are an expert radiologist. Analyze the medical image and provide the clinical caption. IMPORTANT: Output ONLY the clinical caption text. Do not include conversational filler, do not say 'Here is the caption', do not include greetings, and do not explain your reasoning. Output just the raw caption."
             )
 
             messages = [
