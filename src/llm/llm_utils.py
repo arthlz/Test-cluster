@@ -36,7 +36,7 @@ class MedicalImageCaptioner:
     def generate_caption(self, image: Image.Image) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         """Geração direta sem exemplos RAG."""
         if self.provider == "huggingface":
-            prompt_text = "Generate a concise, clinically accurate caption describing this medical image."
+            prompt_text = "You are an expert radiologist. Analyze the medical image and provide the clinical caption. IMPORTANT: Output ONLY the clinical caption text. Do not include conversational filler, do not say 'Here is the caption', do not include greetings, and do not explain your reasoning. Output just the raw caption."
             messages = [
                 {
                     "role": "user",
