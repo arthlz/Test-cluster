@@ -1,2 +1,4 @@
 # Slurm scripts (Contém tokens sensíveis)
 submit_job.sh
+pipeline_state/
+vectordb/

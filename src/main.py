@@ -51,7 +51,7 @@ class MedicalImageCaptioner:
         self.model_name = model_name
         self.max_tokens = max_tokens
 
-        self.num_validation_samples = 300
+        self.num_validation_samples = 2000
         self.num_rag_examples = 3
         self.random_seed=42
 
@@ -98,7 +98,7 @@ class MedicalImageCaptioner:
             
             # Use a reasonable limit for initial testing to prevent memory issues
             # You can increase this or set to None for full dataset
-            max_samples = 10000  # Start with 10k samples, adjust as needed
+            max_samples = None
             print(f"   Processing up to {max_samples} training samples for vector database")
             
             self.vectordb = ImageVectorDB()
