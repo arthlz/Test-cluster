@@ -135,6 +135,24 @@ class Config:
         """Get dataset configuration."""
         return self.config_data.get('dataset', {})
     
+    def get_prompt_config(self) -> Dict[str, Any]:
+    	"""Get prompt configuration."""
+    	return self.config_data.get('prompt', {})
+
+    def get_prompt_path(self) -> Optional[Path]:
+    """Resolve o caminho do arquivo de prompt (relativo à raiz do projeto)."""
+    	prompt_file = self.get('prompt.file')
+    	if not prompt_file:
+        	return None
+    
+    	path = Path(prompt_file)
+    	if not path.is_absolute():
+        	path = self.project_root / path
+    
+    	if not path.exists():
+        	raise FileNotFoundError(f"Prompt file not found: {path}")
+    	return path
+    
     def get_rag_config(self) -> Dict[str, Any]:
         """Get RAG configuration."""
         return self.config_data.get('rag', {})
@@ -180,7 +198,7 @@ class Config:
 
 
 # Global configuration instance
-config = Config(config_file="config_google.yaml")
+config = Config(config_file=os.environ.get("PIPELINE_CONFIG", "config_medgemma.yaml"))
 
 # Convenience function to get config
 def get_config() -> Config:

@@ -5,6 +5,8 @@ model:
   load_in_4bit: true
   temperature: 0.2
 
+prompt:
+  file: "prompts/specific_prompt.txt"
 
 dataset:
   name: "roco-v2"
