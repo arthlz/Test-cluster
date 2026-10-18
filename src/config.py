@@ -30,11 +30,12 @@ class Config:
         self.cache_drive = self.config_data.get('cache', {}).get('drive', cache_drive).upper()
         custom_cache = self.config_data.get('cache', {}).get('custom_dir') or custom_cache_dir
         
-        if custom_cache:
-            self.cache_dir = Path(custom_cache)
+
+        if os.path.exists('/data') and os.access('/data', os.W_OK):
+            self.cache_dir = Path('/data/agsl_cache')
         else:
-            self.cache_dir = Path("/data/agsl_cache")
-        
+            self.cache_dir = Path.home() / '.cache' / 'agsl_cache'
+
         # Create cache directory
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         
@@ -136,22 +137,22 @@ class Config:
         return self.config_data.get('dataset', {})
     
     def get_prompt_config(self) -> Dict[str, Any]:
-    	"""Get prompt configuration."""
-    	return self.config_data.get('prompt', {})
+        """Get prompt configuration."""
+        return self.config_data.get('prompt', {})
 
     def get_prompt_path(self) -> Optional[Path]:
-    """Resolve o caminho do arquivo de prompt (relativo à raiz do projeto)."""
-    	prompt_file = self.get('prompt.file')
-    	if not prompt_file:
-        	return None
+        """Resolve o caminho do arquivo de prompt (relativo à raiz do projeto)."""
+        prompt_file = self.get('prompt.file')
+        if not prompt_file:
+            return None
     
-    	path = Path(prompt_file)
-    	if not path.is_absolute():
-        	path = self.project_root / path
+        path = Path(prompt_file)
+        if not path.is_absolute():
+            path = self.project_root / path
     
-    	if not path.exists():
-        	raise FileNotFoundError(f"Prompt file not found: {path}")
-    	return path
+        if not path.exists():
+            raise FileNotFoundError(f"Prompt file not found: {path}")
+        return path
     
     def get_rag_config(self) -> Dict[str, Any]:
         """Get RAG configuration."""
