@@ -39,7 +39,7 @@ class MedicalImageCaptioner:
         
         Args:
             model_name (str): OpenAI model name (overrides config)
-            num_validation_samples (int): Number of validation samples to process (overrides config)
+            num_test_samples (int): Number of test samples to process (overrides config)
             num_rag_examples (int): Number of RAG examples to use (overrides config)
             random_seed (int): Random seed for reproducibility (overrides config)
             run_cost_analysis (bool): Whether to run cost analysis after generation (overrides config)
@@ -51,18 +51,21 @@ class MedicalImageCaptioner:
         self.model_name = model_name
         self.max_tokens = max_tokens
 
-        self.num_validation_samples = 9904
+        self.num_test_samples = None
         self.num_rag_examples = 3
         self.random_seed=42
 
         self.run_evaluation = True 
         self.run_cost_analysis= False 
         
+        prompt_path = get_config().get_prompt_path()
+
         self.captioner = CaptionerEngine(
             provider=self.provider,
             model_name=self.model_name,
-            max_tokens=self.max_tokens
-        )
+            max_tokens=self.max_tokens,
+            prompt_file=str(prompt_path) if prompt_path else None,
+	)
 
         print(f"Carregando modelo local {self.model_name}")
         
@@ -117,7 +120,7 @@ class MedicalImageCaptioner:
     
     def generate_captions(self, save_results: bool = True) -> List[Dict[str, Any]]:
         """
-        Generate captions for validation samples using RAG.
+        Generate captions for test samples using RAG.
         
         Args:
             save_results (bool): Whether to save results to JSONL file
@@ -129,24 +132,21 @@ class MedicalImageCaptioner:
         print("GENERATING CAPTIONS WITH RAG")
         print("=" * 60)
         
-        # Get validation samples
-        print(f"1. Sampling {self.num_validation_samples} validation images...")
-        validation_samples = self.data_handler.get_validation_samples(
-            num_samples=self.num_validation_samples,
-            random_seed=self.random_seed
-        )
+        # Get test samples
+        print(f"1. Sampling {self.num_test_samples} test images...")
+        test_samples = self.data_handler.get_test_samples()
         
-        print(f"   Processing {len(validation_samples)} validation samples")
+        print(f"   Processing {len(test_samples)} test samples")
             
         # Generate timestamp for output file
         timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
         jsonl_path = self.config.get_responses_path(timestamp)
         
-        # Process each validation sample
+        # Process each test sample
         results = []
         total_cost = 0.0
-        total_samples = len(validation_samples)
-        for i, sample in enumerate(validation_samples):
+        total_samples = len(test_samples)
+        for i, sample in enumerate(test_samples):
             if (i + 1) % 10 == 0 or (i + 1) == 1 or (i + 1) == total_samples:
                 print(f"[{datetime.now().strftime('%H:%M:%S')}] Amostra {i + 1}/{total_samples} em processamento...", flush=True)
             
@@ -267,7 +267,7 @@ class MedicalImageCaptioner:
         # Save pipeline configuration
         pipeline_config = {
             "model_name": self.model_name,
-            "num_validation_samples": self.num_validation_samples,
+            "num_test_samples": self.num_test_samples,
             "num_rag_examples": self.num_rag_examples,
             "random_seed": self.random_seed,
             "timestamp": datetime.now().isoformat()
@@ -345,7 +345,9 @@ class MedicalImageCaptioner:
         print("RUNNING EVALUATION ANALYSIS")
         print("=" * 60)
         
-        experiment_name = f"/{self.model_name}_rag_{self.num_rag_examples}_examples"
+        prompt_tag = Path(get_config().get('prompt.file', 'default')).stem
+
+        experiment_name = f"/{self.model_name}_rag_{self.num_rag_examples}_examples_{prompt_tag} "
         output_dir += experiment_name
         visualizer = EvaluationVisualizer()
         
@@ -410,23 +412,18 @@ class MedicalImageCaptioner:
 
 def main(config: Config):
     """Main function to run the medical image captioning pipeline."""
-    provider = config.get_model_config().get('provider', '').lower()
-    
-    # Valida chaves apenas se for usar APIs pagas
-    if provider == "openai" and not os.getenv("OPENAI_API_KEY"):
-        print("Error: Please set OPENAI_API_KEY in your .env file")
-        return
-    if provider == "google" and not os.getenv("GOOGLE_API_KEY"):
-        print("Error: Please set GOOGLE_API_KEY in your .env file")
-        return
-    if provider == "huggingface" and not (os.getenv("HF_TOKEN") or os.getenv("HUGGING_FACE_HUB_TOKEN")):
-        print("Warning: HF_TOKEN not found. Ensure you are authenticated via 'huggingface-cli login'.")
+    model_cfg = config.get_model_config()
+    rag_cfg = config.get_rag_config()
+    provider = model_cfg.get('provider', 'huggingface').lower()
+    model_name = model_cfg.get('name', 'google/medgemma-1.5-4b-it')
+    num_rag = rag_cfg.get('num_examples', 3)
 
-    # Instancia o pipeline passando a config ativa
+    # Instancia o pipeline passando o modelo e k do RAG corretos
     pipeline = MedicalImageCaptioner(
-        provider=getattr(config, 'provider', 'huggingface'),
-        model_name=getattr(config, 'model_name', 'google/medgemma-27b-it')
+        provider=provider,
+        model_name=model_name
     )
+    pipeline.num_rag_examples = num_rag
     
     try:
         pipeline.setup_pipeline()
@@ -447,8 +444,8 @@ def main(config: Config):
 
 if __name__ == "__main__":
     # Modelos e números de exemplos RAG a testar
-    model_names = ["google/medgemma-27b-it"]
-    rag_examples = [0, 3]
+    model_names = ["google/medgemma-1.5-4b-it"]
+    rag_examples = [0, 3]  # [0, 3] para rodar sem RAG e com RAG
 
     for model_name in model_names:
         for num_rag_examples in rag_examples:

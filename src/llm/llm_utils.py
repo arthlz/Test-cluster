@@ -1,15 +1,30 @@
 import os
+
 import torch
+from pathlib import Path
 from PIL import Image
 from typing import List, Dict, Any, Tuple
 from transformers import AutoProcessor, AutoModelForImageTextToText, BitsAndBytesConfig
 
+default_instruction = (
+    "You are an expert radiologist. Analyze the medical image and provide the clinical caption. "
+    "IMPORTANT: Output ONLY the clinical caption text. Do not include conversational filler, "
+    "do not say 'Here is the caption', do not include greetings, and do not explain your reasoning. "
+    "Output just the raw caption."
+)
+
 class MedicalImageCaptioner:
-    def __init__(self, provider: str = "huggingface", model_name: str = "google/medgemma-27b-it", max_tokens: int = 512):
+    def __init__(self, provider: str = "huggingface", model_name: str = "google/medgemma-1.5-4b-it", max_tokens: int = 512, prompt_file: str = None):
         self.provider = provider.lower()
         self.model_name = model_name
         self.max_tokens = max_tokens
-        
+
+        if prompt_file:
+            self.instruction = Path(prompt_file).read_text(encoding="utf-8").strip()
+            print(f"Prompt carregado de: {prompt_file}")
+        else:
+            self.instruction = default_instruction
+
         if self.provider == "huggingface" or "medgemma" in self.model_name.lower():
             print(f"Loading local model: {self.model_name}")
             
@@ -28,7 +43,7 @@ class MedicalImageCaptioner:
     def generate_caption(self, image: Image.Image) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         """Geração direta sem exemplos RAG."""
         if self.provider == "huggingface":
-            prompt_text = "You are an expert radiologist. Analyze the medical image and provide the clinical caption. IMPORTANT: Output ONLY the clinical caption text. Do not include conversational filler, do not say 'Here is the caption', do not include greetings, and do not explain your reasoning. Output just the raw caption."
+            prompt_text = self.instruction
             messages = [
                 {
                     "role": "user",
@@ -52,7 +67,7 @@ class MedicalImageCaptioner:
             
             prompt_text = (
                 f"{rag_context}\n"
-                "You are an expert radiologist. Analyze the medical image and provide the clinical caption. IMPORTANT: Output ONLY the clinical caption text. Do not include conversational filler, do not say 'Here is the caption', do not include greetings, and do not explain your reasoning. Output just the raw caption."
+                f"{self.instruction}"
             )
 
             messages = [

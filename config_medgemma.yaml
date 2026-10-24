@@ -1,10 +1,12 @@
 model:
-  name: "google/medgemma-27b-it"
+  name: "google/medgemma-1.5-4b-it"
   provider: "huggingface"
   max_tokens: 512
   load_in_4bit: true
   temperature: 0.2
 
+prompt:
+  file: "prompts/specific_prompt.txt"
 
 dataset:
   name: "roco-v2"
