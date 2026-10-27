@@ -1,0 +1,13 @@
+==========================================
+Iniciando Job 17890 em Sat Oct 24 10:27:37 PM -03 2026
+Nó de execução: cluster-node7
+==========================================
+Copiando modelo e dataset para o SSD NVMe da GPU (isso leva uns 3 a 5 minutos)...
+Cópia concluída! Iniciando o Qwen3-4b-vl...
+Configured caching to use D: drive: /data/agsl_cache
+
+---> Running pipeline: Qwen/Qwen3-VL-4B-Instruct | RAG k=0 <---
+==========================================
+ [ERRO] O pipeline falhou com código 1 em Sat Oct 24 10:51:41 PM -03 2026!
+Consulte o arquivo logs/qwen_4b_vl_instruct_17890.err para mais detalhes.
+==========================================

@@ -199,7 +199,7 @@ class Config:
 
 
 # Global configuration instance
-config = Config(config_file=os.environ.get("PIPELINE_CONFIG", "config_medgemma.yaml"))
+config = Config(config_file=os.environ.get("PIPELINE_CONFIG", "config_qwen3-4b-vl-instruct.yaml"))
 
 # Convenience function to get config
 def get_config() -> Config:

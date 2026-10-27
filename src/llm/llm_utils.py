@@ -14,10 +14,11 @@ default_instruction = (
 )
 
 class MedicalImageCaptioner:
-    def __init__(self, provider: str = "huggingface", model_name: str = "google/medgemma-1.5-4b-it", max_tokens: int = 512, prompt_file: str = None):
+    def __init__(self, provider: str = "huggingface", model_name: str = "Qwen/Qwen3-VL-4B-Instruct", max_tokens: int = 512, prompt_file: str = None):
         self.provider = provider.lower()
         self.model_name = model_name
         self.max_tokens = max_tokens
+        self.is_qwen = "qwen" in self.model_name.lower()
 
         if prompt_file:
             self.instruction = Path(prompt_file).read_text(encoding="utf-8").strip()
@@ -25,17 +26,29 @@ class MedicalImageCaptioner:
         else:
             self.instruction = default_instruction
 
-        if self.provider == "huggingface" or "medgemma" in self.model_name.lower():
-            print(f"Loading local model: {self.model_name}")
-            
-            self.processor = AutoProcessor.from_pretrained(self.model_name)
-
+        if "qwen" in self.model_name.lower():
+            print(f"Loading local Qwen model: {self.model_name}")
+            self.processor = AutoProcessor.from_pretrained(
+                self.model_name,
+                trust_remote_code=True
+            )
             self.model = AutoModelForImageTextToText.from_pretrained(
                 self.model_name,
-                attn_implementation = "sdpa", #  algoritmo para redução de consumo de memória e melhoria na velocidade
+                attn_implementation="sdpa",
+                torch_dtype=torch.bfloat16,
+                device_map="auto",
+                trust_remote_code=True
+            )
+        # Fallback para MedGemma / outros modelos Hugging Face
+        elif self.provider == "huggingface" or "medgemma" in self.model_name.lower():
+            print(f"Loading local model: {self.model_name}")
+            self.processor = AutoProcessor.from_pretrained(self.model_name)
+            self.model = AutoModelForImageTextToText.from_pretrained(
+                self.model_name,
+                attn_implementation="sdpa",
                 torch_dtype=torch.bfloat16,
                 device_map="auto"
-            )
+            ) 
         else:
             # Mantém suas implementações anteriores (OpenAI / Google Gemini)
             pass
@@ -86,28 +99,52 @@ class MedicalImageCaptioner:
 
     def _run_hf_inference(self, messages: list, images: list) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         """Executa a geração local via PyTorch / Hugging Face."""
-        text_prompt = self.processor.apply_chat_template(messages, add_generation_prompt=True)
-        inputs = self.processor(text=[text_prompt], images=images, return_tensors="pt").to(self.model.device)
+        text_prompt = self.processor.apply_chat_template(
+            messages,
+            tokenize=False,
+            add_generation_prompt=True
+        )
 
+        # 2. Prepara os tensores de visão específicos de cada arquitetura
+        if self.is_qwen:
+            from qwen_vl_utils import process_vision_info
+            image_inputs, video_inputs = process_vision_info(messages)
+            inputs = self.processor(
+                text=[text_prompt],
+                images=image_inputs,
+                videos=video_inputs,
+                padding=True,
+                return_tensors="pt"
+            ).to(self.model.device)
+        else:
+            # MedGemma / PaliGemma tradicional
+            inputs = self.processor(
+                text=[text_prompt],
+                images=images,
+                return_tensors="pt"
+            ).to(self.model.device)
+
+        # 3. Geração determinística (greedy search para consistência de métricas)
         with torch.no_grad():
             generated_ids = self.model.generate(
                 **inputs,
                 max_new_tokens=self.max_tokens,
-                do_sample=False  # Geração determinística (greedy) para experimentos consistentes
+                do_sample=False
             )
-            
-            # Decodifica apenas a resposta gerada, ignorando os tokens do prompt
+
+            # 4. Decodificação fatiada: remove os tokens de entrada (prompt + imagem)
             input_length = inputs["input_ids"].shape[1]
             caption = self.processor.batch_decode(
-                generated_ids[:, input_length:], 
-                skip_special_tokens=True
+                generated_ids[:, input_length:],
+                skip_special_tokens=True,
+                clean_up_tokenization_spaces=False
             )[0].strip()
 
         token_usage = {
             "input_tokens": int(input_length),
             "output_tokens": int(generated_ids.shape[1] - input_length),
             "total_tokens": int(generated_ids.shape[1]),
-            "cost_usd": 0.0  # Execução local tem custo zero de API
+            "cost_usd": 0.0
         }
 
         return {"caption": caption}, token_usage
