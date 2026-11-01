@@ -1,4 +1,4 @@
-# Medical Image Captioning Evaluation Report
+# Medical Image Captioning Evaluation Report (rocov2)
 
 **Evaluation Date:** 2026-10-26 02:53
 **Number of Samples:** 9927
