@@ -1,4 +1,4 @@
-# ImageCLEFmedical Caption Evaluation Report
+# RocoV2 Caption Evaluation Report
 
 - **Data da Avaliação:** 2026-11-01 14:32
 - **Amostras Avaliadas:** 9927
