@@ -1,0 +1,11 @@
+cp: cannot create regular file '/data/agsl_cache/hub/blobs/.huggingface-shared-blobs': Permission denied
+cp: cannot create regular file '/data/agsl_cache/hub/blobs/e5/e530db6da487045339c71adbc0fc93c26d67f63064fc525713217547ac7fce2d': Permission denied
+cp: cannot create regular file '/data/agsl_cache/hub/blobs/e7/e7f4c02d10be7611b607d8c6d53cfb6f16581341e711d3caa9cef56c88c1b8dc': Permission denied
+Traceback (most recent call last):
+  File "/home/CIN/agsl/miniconda3/envs/medgemma_env/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/CIN/agsl/miniconda3/envs/medgemma_env/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/CIN/agsl/experimento-medgemma/Test-cluster/src/main.py", line 16, in <module>
+    from transformers import AutoProcessor, AutoModelForVision2Seq, AutoModelForImageTextToText, BitsAndBytesConfig
+ImportError: cannot import name 'AutoModelForVision2Seq' from 'transformers' (/home/CIN/agsl/miniconda3/envs/medgemma_env/lib/python3.10/site-packages/transformers/__init__.py)

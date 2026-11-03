@@ -14,7 +14,6 @@ import time
 from .config import get_config, update_config, Config
 import torch
 from transformers import AutoProcessor, AutoModelForImageTextToText, BitsAndBytesConfig
-
 from .data.dataset import ROCOv2DataHandler
 from .vectordb.image_vectordb import ImageVectorDB
 from .llm.llm_utils import MedicalImageCaptioner as CaptionerEngine
@@ -415,14 +414,21 @@ def main(config: Config):
     model_cfg = config.get_model_config()
     rag_cfg = config.get_rag_config()
     provider = model_cfg.get('provider', 'huggingface').lower()
-    model_name = model_cfg.get('name', 'google/medgemma-1.5-4b-it')
+    model_name = model_cfg.get('name', 'Qwen/Qwen3-VL-4B-Instruct')
     num_rag = rag_cfg.get('num_examples', 3)
+
+    prompt_cfg = getattr(config, 'get_prompt_config', lambda: config.config.get('prompt', {}))()
+    prompt_file = prompt_cfg.get('file', 'prompts/specific_prompt.txt')
 
     # Instancia o pipeline passando o modelo e k do RAG corretos
     pipeline = MedicalImageCaptioner(
         provider=provider,
         model_name=model_name
     )
+    
+    # Atribui o prompt diretamente como atributo do pipeline, caso a classe o utilize internamente
+    pipeline.prompt_file = prompt_file
+    
     pipeline.num_rag_examples = num_rag
     
     try:
@@ -444,7 +450,7 @@ def main(config: Config):
 
 if __name__ == "__main__":
     # Modelos e números de exemplos RAG a testar
-    model_names = ["google/medgemma-1.5-4b-it"]
+    model_names = ["Qwen/Qwen3-VL-4B-Instruct"]
     rag_examples = [0, 3]  # [0, 3] para rodar sem RAG e com RAG
 
     for model_name in model_names:
