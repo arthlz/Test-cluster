@@ -14,9 +14,9 @@ def test_models():
         }
     ]
 
-    model_to_test = "Qwen/Qwen3-VL-4B-Instruct"
+    # model_to_test = "Qwen/Qwen3-VL-4B-Instruct"
     # Para validar a alternância com o MedGemma, só descomentar a linha abaixo :) 
-    # model_to_test = "google/medgemma-1.5-4b-it"
+    model_to_test = "google/medgemma-1.5-4b-it"
 
     print("=" * 60)
     print(f"A inicializar o modelo: {model_to_test}")

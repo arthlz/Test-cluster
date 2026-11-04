@@ -414,7 +414,7 @@ def main(config: Config):
     model_cfg = config.get_model_config()
     rag_cfg = config.get_rag_config()
     provider = model_cfg.get('provider', 'huggingface').lower()
-    model_name = model_cfg.get('name', 'Qwen/Qwen3-VL-4B-Instruct')
+    model_name = model_cfg.get('name', 'google/medgemma-1.5-4b-it')
     num_rag = rag_cfg.get('num_examples', 3)
 
     prompt_cfg = getattr(config, 'get_prompt_config', lambda: config.config.get('prompt', {}))()
@@ -450,7 +450,7 @@ def main(config: Config):
 
 if __name__ == "__main__":
     # Modelos e números de exemplos RAG a testar
-    model_names = ["Qwen/Qwen3-VL-4B-Instruct"]
+    model_names = ["google/medgemma-1.5-4b-it"]
     rag_examples = [0, 3]  # [0, 3] para rodar sem RAG e com RAG
 
     for model_name in model_names:

@@ -10,7 +10,6 @@ prompt:
 
 dataset:
   name: "roco-v2"
-  validation_samples: 300
   random_seed: 42
 
 rag:
@@ -21,7 +20,6 @@ analysis:
   enable_cost_analysis: true
   enable_evaluation: true
   cost_analysis_format: "markdown"  # Options: markdown, json, csv
-  evaluation_metrics: ["bleu", "rouge"]  # Evaluation metrics to compute
 
 
 paths:
